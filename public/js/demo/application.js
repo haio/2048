@@ -61,6 +61,8 @@ window.requestAnimationFrame(function () {
       gameManager.move(action.direction, action.tile);
       gameManager.storageManager.setGameState(action.gameState);
     } else {
+      var gameover = document.querySelector('#id' + action.uid + ' .game-over');
+      if (gameover) gameover.style.display = 'none';
       gameManager.storageManager.setGameState(action.gameState);
       gameManager.setup();
     }
