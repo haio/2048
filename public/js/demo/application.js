@@ -10,16 +10,15 @@ window.requestAnimationFrame(function () {
     console.log(err);
   });
   socket.on('login', function (uid) {
-    console.log('new user logined', uid);
     if (managers[uid]) return;
     newGame(uid);
     managers[uid] = new GameManager(uid, 4, HTMLActuator, LocalStorageManager);
   });
   socket.on('move', function (action) {
-    console.log('moving......', action.uid, Object.keys(managers));
+    console.log('moving......', action, Object.keys(managers));
     var gameManager = managers[action.uid];
     if (!gameManager) return;
-    if (action.direction) {
+    if (action.direction !== undefined) {
       gameManager.move(action.direction, action.tile);
       gameManager.storageManager.setGameState(action.gameState);
     } else {
@@ -32,7 +31,7 @@ window.requestAnimationFrame(function () {
 function newGame (uid) {
   var container = document.querySelector(".container");
   var gameDiv = document.createElement('div');
-  gameDiv.id = uid;
+  gameDiv.id = 'id' + uid;
   gameDiv.className = 'game-set-container';
   gameDiv.innerHTML = html;
   container.appendChild(gameDiv); 

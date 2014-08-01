@@ -271,6 +271,7 @@ hr {
       .game-container .game-message.game-won a.keep-playing-button {
         display: inline-block; }
     .game-container .game-message.game-won, .game-container .game-message.game-over {
+      top: -150px;
       display: block; }
 
 
@@ -685,6 +686,7 @@ hr {
         .game-container .game-message.game-won a.keep-playing-button {
           display: inline-block; }
       .game-container .game-message.game-won, .game-container .game-message.game-over {
+        top: -150px;
         display: block; }
 
   .grid-container {

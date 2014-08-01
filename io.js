@@ -8,7 +8,6 @@ module.exports = function (socket) {
     console.log('New client connected!');
     var parsed = require('url').parse(socket.request.url);
     var query = require('querystring').parse(parsed.query);
-    console.log(query);
     if (query.dashboard) {
         socket.join('dashboard');
     } else {
