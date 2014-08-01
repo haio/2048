@@ -1,3 +1,41 @@
+var scoreList = []
+
+function compare (s1, s2) {
+  if (s1.score < s2.score)
+    return 1;
+  else if ( s1.score > s2.score )
+    return -1;
+  else
+    return 0;
+}
+
+function rankScores (action) {
+  var flag = 0;
+  for( var index in scoreList ) {
+    if( scoreList[index].uid == action.uid ) {
+      flag = 1;
+      scoreList[index].score = action.gameState.score;
+    }
+  }
+  if( flag != 1 ){
+    scoreList.push({uid:action.uid, score:action.gameState.score});
+  }
+
+  var board = document.getElementById("board");
+  while(board.firstChild){
+    board.removeChild(board.firstChild);
+  }
+  scoreList.sort(compare);
+  for ( var index in scoreList) {
+    var score = document.createElement("div");
+    score.classList.add("affix-score");
+    score.textContent = scoreList[index].score;
+    score.setAttribute("data-score", scoreList[index].score);
+    board.appendChild(score);
+  }
+
+}
+
 window.requestAnimationFrame(function () {
   var managers = {};
   // var gameManager = new GameManager('uid', 4, HTMLActuator, LocalStorageManager);
@@ -16,7 +54,8 @@ window.requestAnimationFrame(function () {
     managers[uid] = new GameManager(uid, 4, HTMLActuator, LocalStorageManager);
   });
   socket.on('move', function (action) {
-    console.log('moving......', action.uid, Object.keys(managers));
+    console.log('moving......', action.gameState.score,action.uid, Object.keys(managers));
+    rankScores(action);
     var gameManager = managers[action.uid];
     if (!gameManager) return;
     if (action.direction) {
