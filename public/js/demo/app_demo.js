@@ -1,6 +1,6 @@
 
 window.requestAnimationFrame(function () {
-  var gameManager = new GameManager(4, HTMLActuator, LocalStorageManager);
+  var gameManager = new GameManager(4, KeyboardInputManager, HTMLActuator, LocalStorageManager);
   console.log(gameManager);
   var options = {
     topics: "sohu",
@@ -11,11 +11,18 @@ window.requestAnimationFrame(function () {
   var channel = new Channel(options);
   channel.onopen = function () {};
   channel.onmessage = function (msg) {
-    console.log('onmessage', msg)
     var action = JSON.parse(msg.data);
-    gameManager.storageManager.setGameState(action.gameState);
-    gameManager.setup();
+    console.log(action)
+    if (action.direction) {
+      // gameManager.move(action.direction, action.tile);
+      gameManager.storageManager.setGameState(action.gameState);
+    } else {
+      gameManager.storageManager.setGameState(action.gameState);
+      gameManager.setup();
+    }
   };
-  channel.onerror = function (err) {};
+  channel.onerror = function (err) {
+    console.log(err)
+  };
   channel.onclose = function (reason) {};
 });

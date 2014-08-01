@@ -73,14 +73,16 @@ GameManager.prototype.addStartTiles = function () {
 GameManager.prototype.addRandomTile = function () {
   if (this.grid.cellsAvailable()) {
     var value = Math.random() < 0.9 ? 2 : 4;
-    var tile = new Tile(this.grid.randomAvailableCell(), value);
-
+    var cell = this.grid.randomAvailableCell();
+    var tile = new Tile(cell, value);
+    console.log(value, cell)
     this.grid.insertTile(tile);
+    return { cell: cell, value: value };
   }
 };
 
 // Sends the updated grid to the actuator
-GameManager.prototype.actuate = function (direction) {
+GameManager.prototype.actuate = function (direction, tile) {
   if (this.storageManager.getBestScore() < this.score) {
     this.storageManager.setBestScore(this.score);
   }
@@ -90,7 +92,7 @@ GameManager.prototype.actuate = function (direction) {
     this.storageManager.clearGameState();
   } else {
     var gameState = this.serialize();
-    this.tunnel.move({ direction: direction, gameState: gameState });
+    this.tunnel.move({ direction: direction, gameState: gameState, tile: tile });
     this.storageManager.setGameState(gameState);
   }
 
@@ -186,14 +188,16 @@ GameManager.prototype.move = function (direction) {
     });
   });
 
+  console.log(moved)
+
   if (moved) {
-    this.addRandomTile();
+    var tile = this.addRandomTile();
 
     if (!this.movesAvailable()) {
       this.over = true; // Game over!
     }
 
-    this.actuate(direction);
+    this.actuate(direction, tile);
   }
 };
 
