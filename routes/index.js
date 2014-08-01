@@ -1,5 +1,6 @@
 var db = require('../db').db;
 var uuid = require('node-uuid');
+var game = require('./games');
 
 module.exports = function(app) {
     
@@ -8,4 +9,5 @@ module.exports = function(app) {
         db.sadd('2048:users', uid);
         res.redirect('2048.html?uid=' + uid);
     });
+    game(app);
 };
