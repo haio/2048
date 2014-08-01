@@ -1,8 +1,7 @@
 'use strict';
 
 var redis = require('redis');
-var client = redis.createClient(8359, '10.16.33.62');
-client.auth('1duvtlet0j:cf090196754d78b7090854a916426092728a1e30');
+var client = require('./db').client;
 
 module.exports = function (socket) {
     console.log('New client connected!');
@@ -11,4 +10,8 @@ module.exports = function (socket) {
 
 function move (action) {
     client.lpush('sohu', JSON.stringify(action.gameState));
+}
+
+function login (uid) {
+
 }

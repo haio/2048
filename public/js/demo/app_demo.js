@@ -11,15 +11,12 @@ window.requestAnimationFrame(function () {
   var channel = new Channel(options);
   channel.onopen = function () {};
   channel.onmessage = function (msg) {
+    console.log('onmessage', msg)
     gameManager.storageManager.setGameState(JSON.parse(msg.data));
     gameManager.setup();
-    console.log(msg.data);
+    console.log('raw data', msg.data);
     console.log(JSON.parse(msg.data));
   };
   channel.onerror = function (err) {};
   channel.onclose = function (reason) {};
-
 });
-
-
-

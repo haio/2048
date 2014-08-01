@@ -1,6 +1,10 @@
 var redis = require('redis');
 var db = redis.createClient(6379, 'localhost');
+var client = redis.createClient(8359, '10.16.33.62');
+client.auth('1duvtlet0j:cf090196754d78b7090854a916426092728a1e30');
 
+exports.db = db;
+exports.client = client;
 
 exports.addOnline = function(req, res, next) {
     var ua = req.headers['user-agent'];
