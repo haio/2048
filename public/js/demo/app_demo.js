@@ -1,6 +1,6 @@
 
 window.requestAnimationFrame(function () {
-  var gameManager = new GameManager(4, KeyboardInputManager, HTMLActuator, LocalStorageManager);
+  var gameManager = new GameManager(4, HTMLActuator, LocalStorageManager);
   console.log(gameManager);
   var options = {
     topics: "sohu",
@@ -13,8 +13,8 @@ window.requestAnimationFrame(function () {
   channel.onmessage = function (msg) {
     gameManager.storageManager.setGameState(JSON.parse(msg.data));
     gameManager.setup();
-    //console.log(msg.data);
-    //console.log(JSON.parse(msg.data));
+    console.log(msg.data);
+    console.log(JSON.parse(msg.data));
   };
   channel.onerror = function (err) {};
   channel.onclose = function (reason) {};

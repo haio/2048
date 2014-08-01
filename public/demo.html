@@ -2,10 +2,10 @@
 <html>
 <head>
   <meta charset="utf-8">
-  <title>Player online: <%= title %></title>
+  <title>room</title>
 
-  <link href="/css/main.css" rel="stylesheet" type="text/css">
-  <link rel="shortcut icon" href="/favicon.ico">
+  <link href="css/main.css" rel="stylesheet" type="text/css">
+  <link rel="shortcut icon" href="favicon.ico">
   <link rel="apple-touch-icon" href="img/apple-touch-icon.png">
   <link rel="apple-touch-startup-image" href="img/apple-touch-startup-image-640x1096.png" media="(device-width: 320px) and (device-height: 568px) and (-webkit-device-pixel-ratio: 2)"> <!-- iPhone 5+ -->
   <link rel="apple-touch-startup-image" href="img/apple-touch-startup-image-640x920.png"  media="(device-width: 320px) and (device-height: 480px) and (-webkit-device-pixel-ratio: 2)"> <!-- iPhone, retina -->
@@ -27,19 +27,10 @@
     </div>
 
     <div class="above-game">
-      <p class="game-intro">Join the numbers and get to the <strong>2048 tile!</strong></p>
-      <a class="restart-button">New Game</a>
+      <p class="game-intro"> <strong>2048 Online demo</strong></p>
     </div>
 
     <div class="game-container">
-      <div class="game-message">
-        <p></p>
-        <div class="lower">
-            <a class="keep-playing-button">Keep going</a>
-          <a class="retry-button">Try again</a>
-        </div>
-      </div>
-
       <div class="grid-container">
         <div class="grid-row">
           <div class="grid-cell"></div>
@@ -71,18 +62,17 @@
 
       </div>
     </div>
-
   </div>
 
-  <script src="/js/game/bind_polyfill.js"></script>
-  <script src="/js/game/classlist_polyfill.js"></script>
-  <script src="/js/game/animframe_polyfill.js"></script>
-  <script src="/js/game/keyboard_input_manager.js"></script>
-  <script src="/js/game/html_actuator.js"></script>
-  <script src="/js/game/grid.js"></script>
-  <script src="/js/game/tile.js"></script>
-  <script src="/js/game/local_storage_manager.js"></script>
-  <script src="/js/game/game_manager.js"></script>
-  <script src="/js/game/application.js"></script>
+  <script src="js/channel.min.js"></script>
+  <script src="js/demo/bind_polyfill.js"></script>
+  <script src="js/demo/classlist_polyfill.js"></script>
+  <script src="js/demo/animframe_polyfill.js"></script>
+  <script src="js/demo/html_actuator.js"></script>
+  <script src="js/demo/grid.js"></script>
+  <script src="js/demo/tile.js"></script>
+  <script src="js/demo/local_storage_demo.js"></script>
+  <script src="js/demo/game_manager.js"></script>
+  <script src="js/demo/app_demo.js"></script>
 </body>
 </html>

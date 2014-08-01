@@ -17,6 +17,10 @@ exports.scoreOnline = function(req, res, next) {
     });
 }; 
 
-exports.storeUser = function(req, res, next) {
+exports.storePlayer = function(req, res, next) {
 
+}
+
+exports.storeUser = function(req, res, next) {
+    
 }
