@@ -1,8 +1,9 @@
-function GameManager(size, InputManager, Actuator, StorageManager) {
+function GameManager(size, InputManager, Actuator, StorageManager, Tunnel) {
   this.size           = size; // Size of the grid
   this.inputManager   = new InputManager;
   this.storageManager = new StorageManager;
   this.actuator       = new Actuator;
+  this.tunnel = new Tunnel();
 
   this.startTiles     = 2;
 
@@ -56,6 +57,9 @@ GameManager.prototype.setup = function () {
 
   // Update the actuator
   this.actuate();
+
+  // Setup tunnel
+  this.tunnel.setup();
 };
 
 // Set up the initial tiles to start the game with
@@ -76,7 +80,7 @@ GameManager.prototype.addRandomTile = function () {
 };
 
 // Sends the updated grid to the actuator
-GameManager.prototype.actuate = function () {
+GameManager.prototype.actuate = function (direction) {
   if (this.storageManager.getBestScore() < this.score) {
     this.storageManager.setBestScore(this.score);
   }
@@ -85,7 +89,9 @@ GameManager.prototype.actuate = function () {
   if (this.over) {
     this.storageManager.clearGameState();
   } else {
-    this.storageManager.setGameState(this.serialize());
+    var gameState = this.serialize();
+    this.tunnel.move({ direction: direction, gameState: gameState });
+    this.storageManager.setGameState(gameState);
   }
 
   this.actuator.actuate(this.grid, {
@@ -128,6 +134,7 @@ GameManager.prototype.moveTile = function (tile, cell) {
 
 // Move tiles on the grid in the specified direction
 GameManager.prototype.move = function (direction) {
+  console.log('GameManager moveing.....', direction)
   // 0: up, 1: right, 2: down, 3: left
   var self = this;
 
@@ -186,7 +193,7 @@ GameManager.prototype.move = function (direction) {
       this.over = true; // Game over!
     }
 
-    this.actuate();
+    this.actuate(direction);
   }
 };
 

@@ -55,10 +55,10 @@ LocalStorageManager.prototype.getGameState = function () {
 };
 
 LocalStorageManager.prototype.setGameState = function (gameState) {
-  var xmlhttp = new XMLHttpRequest();;
-  xmlhttp.open("POST","/score",true);
-  xmlhttp.setRequestHeader("Content-Type","application/json");  
-  xmlhttp.send(JSON.stringify({ state: gameState, score:gameState.score }));
+  // var xmlhttp = new XMLHttpRequest();;
+  // xmlhttp.open("POST","/score",true);
+  // xmlhttp.setRequestHeader("Content-Type","application/json");  
+  // xmlhttp.send(JSON.stringify({ state: gameState, score:gameState.score }));
   this.storage.setItem(this.gameStateKey, JSON.stringify(gameState));
 };
 

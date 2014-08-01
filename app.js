@@ -1,3 +1,4 @@
+var http = require('http');
 var express = require('express');
 var bodyParser = require('body-parser');
 var path = require('path');
@@ -9,6 +10,8 @@ var db = redis.createClient(6379, 'localhost');
 var routes = require('./routes');
 
 var app = express();
+var server = http.Server(app);
+var io = require('socket.io')(server);
 
 exports.db = db;
 
@@ -20,8 +23,8 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 routes(app);
 
+io.on('connection', require('./io'));
 
-var server = app.listen(3000, function() {
+server.listen(3000, function() {
     console.log('Listening on port %d', server.address().port);
 });
-
