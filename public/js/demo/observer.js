@@ -36,20 +36,18 @@ var emoji_options = {
 var emoji_channel = new Channel(emoji_options);
 emoji_channel.onopen = function () {};
 emoji_channel.onmessage = function (msg) {
-  var container = document.getElementById(JSON.parse(msg.data).uid);
+  var container = document.getElementById("id" + JSON.parse(msg.data).uid);
   
   var comment = document.createElement("div");
   comment.classList.add("emoji");
-  //comment.textContent("123");
   var emoji = document.createElement("li");
   emoji.setAttribute("class", JSON.parse(msg.data).mo);
   comment.appendChild(emoji);
-  if (container.children[2]) {
+  if (container.children[2] != undefined) {
     container.replaceChild( comment , container.children[2]);
   } else {
-    container.appendChild(comment);
+   container.appendChild(comment);
   }
-  console.log(msg.data);
 };
 emoji_channel.onerror = function (err) {};
 emoji_channel.onclose = function (reason) {};
