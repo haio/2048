@@ -40,8 +40,8 @@ emoji_channel.onmessage = function (msg) {
   
   var comment = document.createElement("div");
   comment.classList.add("emoji");
-  var emoji = document.createElement("li");
-  emoji.setAttribute("class", JSON.parse(msg.data).mo);
+  var emoji = document.createElement("img");
+  emoji.setAttribute("src", 'img/emoji/' + JSON.parse(msg.data).mo + '.png');
   comment.appendChild(emoji);
   if (container.children[2] != undefined) {
     container.replaceChild( comment , container.children[2]);
@@ -51,7 +51,3 @@ emoji_channel.onmessage = function (msg) {
 };
 emoji_channel.onerror = function (err) {};
 emoji_channel.onclose = function (reason) {};
-
-
- 
-

@@ -903,7 +903,7 @@ hr {
     .lightbox-target:target {
         opacity: 1;
         top: 0;
-        bottom: 0;
+        bottom: 15px;
         z-index: 200;
     }
 

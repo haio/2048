@@ -75,7 +75,14 @@
     </div>
 
     <div class="above-game">
-      <i id="emoji1" class="fa fa-camera-retro fa-lg"></i>
+      <img title=":kissing_heart:" alt="kissing_heart" class="emoji" src="img/emoji/kissing_heart.png" align="absmiddle"></img>
+      <img title=":heart:" alt="heart" class="emoji" src="img/emoji/heart.png" align="absmiddle"></img>
+      <img title=":thumbsup:" alt="thumbsup" class="emoji" src="img/emoji/thumbsup.png" align="absmiddle"></img>
+      <img title=":hankey:" alt="hankey" class="emoji" src="img/emoji/hankey.png" align="absmiddle"></img>
+      <img title=":heart_eyes_cat:" alt="heart_eyes_cat" class="emoji" src="img/emoji/heart_eyes_cat.png" align="absmiddle"></img>
+      <img title=":octocat:" alt="octocat" class="emoji" src="img/emoji/octocat.png" align="absmiddle"></img>
+      <img title=":couple:" alt="couple" class="emoji" src="img/emoji/couple.png" align="absmiddle"></img>
+      <img title=":clap:" alt="clap" class="emoji" src="img/emoji/clap.png" align="absmiddle"></img>
     </div>
 
   </div>
@@ -94,15 +101,20 @@
   <script src="js/game/application.js"></script>
 
   <script type="text/javascript">
-    document.getElementById("emoji1").addEventListener("click", function(){
-      var xmlhttp = new XMLHttpRequest();;
-      xmlhttp.open("POST","/emoji",true);
-      xmlhttp.setRequestHeader("Content-Type","application/json");  
-      xmlhttp.send(JSON.stringify({ 
-        uid : document.location.search.split("=")[1], 
-        mo : document.getElementById("emoji1").getAttribute("class")
-      }));
-    })
+    var emojis = document.getElementsByTagName('img');
+    for (var i=0; i<emojis.length; i++) {
+      (function (item) {
+        item.addEventListener('click', function () {
+          var xmlhttp = new XMLHttpRequest();;
+          xmlhttp.open("POST","/emoji",true);
+          xmlhttp.setRequestHeader("Content-Type","application/json");  
+          xmlhttp.send(JSON.stringify({ 
+            uid : document.location.search.split("=")[1], 
+            mo : item.getAttribute('alt')
+          }));
+        });
+      })(emojis[i]);
+    }
   </script>
 
 </body>

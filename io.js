@@ -3,7 +3,6 @@
 var redis = require('redis');
 var client = require('./db').client;
 var db = require('./db').db;
-
 module.exports = function (socket) {
     console.log('New client connected!');
     var parsed = require('url').parse(socket.request.url);
