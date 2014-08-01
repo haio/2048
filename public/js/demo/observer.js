@@ -40,7 +40,10 @@ emoji_channel.onmessage = function (msg) {
   
   var comment = document.createElement("div");
   comment.classList.add("emoji");
-  comment.textContent = JSON.parse(msg.data).mo;
+  //comment.textContent("123");
+  var emoji = document.createElement("li");
+  emoji.setAttribute("class", JSON.parse(msg.data).mo);
+  comment.appendChild(emoji);
   if (container.children[2]) {
     container.replaceChild( comment , container.children[2]);
   } else {
