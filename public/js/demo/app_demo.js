@@ -12,10 +12,9 @@ window.requestAnimationFrame(function () {
   channel.onopen = function () {};
   channel.onmessage = function (msg) {
     console.log('onmessage', msg)
-    gameManager.storageManager.setGameState(JSON.parse(msg.data));
+    var action = JSON.parse(msg.data);
+    gameManager.storageManager.setGameState(action.gameState);
     gameManager.setup();
-    console.log('raw data', msg.data);
-    console.log(JSON.parse(msg.data));
   };
   channel.onerror = function (err) {};
   channel.onclose = function (reason) {};
