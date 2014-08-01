@@ -27,32 +27,5 @@
   observer_channel.onclose = function (reason) {};
 
 
-  var userData = [{
-      user: "u1",
-      score: 1500
-    }, {
-      user: "u2",
-      score: 55
-    }, {
-      user: "u3",
-      score: 5500
-    }, {
-      user: "u4",
-      score: 1515
-    }, {
-      user: "u5",
-      score: 5515
-    }, {
-      user: "u6",
-      score: 15
-    }
-  ];
-
-
-  for ( var index in userData) {
-    var score = document.createElement("div");
-    score.classList.add("affix-score");
-    score.textContent = userData[index].user + " : " +userData[index].score;
-    document.getElementById("board").appendChild(score);
-  }
+ 
 

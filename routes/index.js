@@ -1,6 +1,8 @@
 var db = require('../db').db;
 var uuid = require('node-uuid');
 var game = require('./games');
+var observer = require('./observer');
+
 
 module.exports = function(app) {
     
@@ -10,4 +12,5 @@ module.exports = function(app) {
         res.redirect('2048.html?uid=' + uid);
     });
     game(app);
+    observer(app);
 };

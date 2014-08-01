@@ -145,7 +145,7 @@ hr {
   }
   .affix-container .affix{
     top: 55px;
-    right: 55px;
+    right: 25px;
     position: fixed;
     min-height: 400px;
     min-width: 300px;
@@ -154,7 +154,7 @@ hr {
     background: rgba(238, 228, 218, 0.35);}
   .affix-container .affix-header{
     top: 15px;
-    right: 55px;
+    right: 25px;
     position: fixed;
     min-height: 30px;
     min-width: 300px;
