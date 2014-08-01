@@ -88,10 +88,11 @@ GameManager.prototype.actuate = function (direction, tile) {
   }
 
   // Clear the state when the game is over (game over only, not win)
+  var gameState = this.serialize();
   if (this.over) {
     this.storageManager.clearGameState();
+    this.tunnel.move({ direction: direction, gameState: gameState, tile: tile });
   } else {
-    var gameState = this.serialize();
     this.tunnel.move({ direction: direction, gameState: gameState, tile: tile });
     this.storageManager.setGameState(gameState);
   }
@@ -136,7 +137,6 @@ GameManager.prototype.moveTile = function (tile, cell) {
 
 // Move tiles on the grid in the specified direction
 GameManager.prototype.move = function (direction) {
-  console.log('GameManager moveing.....', direction)
   // 0: up, 1: right, 2: down, 3: left
   var self = this;
 
@@ -187,8 +187,6 @@ GameManager.prototype.move = function (direction) {
       }
     });
   });
-
-  console.log(moved)
 
   if (moved) {
     var tile = this.addRandomTile();

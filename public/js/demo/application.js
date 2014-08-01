@@ -48,7 +48,6 @@ window.requestAnimationFrame(function () {
     console.log(err);
   });
   socket.on('login', function (uid) {
-    console.log('new user logined', uid);
     if (managers[uid]) return;
     newGame(uid);
     managers[uid] = new GameManager(uid, 4, HTMLActuator, LocalStorageManager);
@@ -58,10 +57,12 @@ window.requestAnimationFrame(function () {
     rankScores(action);
     var gameManager = managers[action.uid];
     if (!gameManager) return;
-    if (action.direction) {
+    if (action.direction !== undefined) {
       gameManager.move(action.direction, action.tile);
       gameManager.storageManager.setGameState(action.gameState);
     } else {
+      var gameover = document.querySelector('#id' + action.uid + ' .game-over');
+      if (gameover) gameover.style.display = 'none';
       gameManager.storageManager.setGameState(action.gameState);
       gameManager.setup();
     }
@@ -71,7 +72,7 @@ window.requestAnimationFrame(function () {
 function newGame (uid) {
   var container = document.querySelector(".container");
   var gameDiv = document.createElement('div');
-  gameDiv.id = uid;
+  gameDiv.id = 'id' + uid;
   gameDiv.className = 'game-set-container';
   gameDiv.innerHTML = html;
   container.appendChild(gameDiv); 
