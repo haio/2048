@@ -53,7 +53,6 @@ window.requestAnimationFrame(function () {
     managers[uid] = new GameManager(uid, 4, HTMLActuator, LocalStorageManager);
   });
   socket.on('move', function (action) {
-    console.log('moving......', action.gameState.score,action.uid, Object.keys(managers));
     rankScores(action);
     var gameManager = managers[action.uid];
     if (!gameManager) return;
@@ -66,6 +65,34 @@ window.requestAnimationFrame(function () {
       gameManager.storageManager.setGameState(action.gameState);
       gameManager.setup();
     }
+  });
+  socket.on('emoji', function (emoji) {
+    var container = document.getElementById("id" + emoji.uid);
+    var comment = document.createElement("div");
+    comment.classList.add("emoji");
+    var img = document.createElement("img");
+    img.setAttribute("src", 'img/emoji/' + emoji.mo + '.png');
+    comment.appendChild(img);
+    if (container.children[2] != undefined) {
+      container.replaceChild( comment , container.children[2]);
+    } else {
+      container.appendChild(comment);
+    }
+  });
+  socket.on('comment', function (comment) {
+    var container = document.getElementById("comment");
+    if ( container.childElementCount == 5 ) {
+      while (container.firstChild) {
+        container.removeChild(container.firstChild);
+      }    
+    }
+
+    var div = document.createElement("div");
+    div.classList.add("comment");
+    div.textContent = comment.alias + ": " + comment.comment;
+    div.style.right = (Math.random()*25-25) + "%" ;
+    div.style.bottom = (Math.random()*50 ) + "%" ;
+    container.appendChild(div);
   });
 });
 
@@ -121,4 +148,4 @@ var html = [
     ' </div>',
    '<div class="tile-container">',
      '</div>',
-   '</div>'].join('')
+   '</div>'].join('');
