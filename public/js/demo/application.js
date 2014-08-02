@@ -18,7 +18,7 @@ function rankScores (action) {
     }
   }
   if( flag != 1 ){
-    scoreList.push({uid:action.uid, score:action.gameState.score});
+    scoreList.push({uid:action.uid, score:action.gameState.score, username: action.username});
   }
 
   var board = document.getElementById("board");
@@ -29,7 +29,7 @@ function rankScores (action) {
   for ( var index in scoreList) {
     var score = document.createElement("div");
     score.classList.add("affix-score");
-    score.textContent = scoreList[index].score;
+    score.textContent = scoreList[index].username + ' : ' + scoreList[index].score;
     score.setAttribute("data-score", scoreList[index].score);
     board.appendChild(score);
   }

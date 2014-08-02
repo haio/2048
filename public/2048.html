@@ -107,9 +107,9 @@
         item.addEventListener('click', function () {
           var xmlhttp = new XMLHttpRequest();;
           xmlhttp.open("POST","/emoji",true);
-          xmlhttp.setRequestHeader("Content-Type","application/json");  
+          xmlhttp.setRequestHeader("Content-Type","application/json"); 
           xmlhttp.send(JSON.stringify({ 
-            uid : document.location.search.split("=")[1], 
+            uid : window.location.href.match(/.+uid=(.+)&/) && window.location.href.match(/.+uid=(.+)&/)[1], 
             mo : item.getAttribute('alt')
           }));
         });

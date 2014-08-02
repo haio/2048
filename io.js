@@ -19,6 +19,8 @@ module.exports = function (socket) {
     function move (action) {
         if (!socket.uid) return;
         action.uid = socket.uid;
+        action.username = socket.username;
+        console.log(socket.uid, socket.username)
         socket.to('dashboard').emit('move', action);
     }
 
@@ -26,6 +28,9 @@ module.exports = function (socket) {
         db.sismember('2048:users', uid, function (err, exsits) {
             if (err || !exsits) return socket.disconnect();
             if (!socket.uid) socket.to('dashboard').emit('login', uid);
+            db.get('2048:users:' + uid, function (err, name) {
+                socket.username = name;
+            });
             socket.uid = uid;
         });
     }
