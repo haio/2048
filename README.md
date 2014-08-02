@@ -12,6 +12,9 @@ cd 2048 && npm install
 node app.js
 ```
 
+* Dashboard: [http://0.0.0.0:3000](http://0.0.0.0:3000)
+* Play: [http://0.0.0.0:3000/join](http://0.0.0.0:3000/join)
+
 Have Funnnnn! :laughing:
 
 ## Origin 2048 descriptions : 
