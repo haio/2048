@@ -1,6 +1,18 @@
 #2048 online
 
-An online platform for 2048
+A mulltiple players online platform for 2048
+
+## Setup
+
+* Make sure your have [node.js](http://nodejs.org/) installed and [redis](http://redis.io/) running at your local machine with port 6379.
+
+```sh
+git clone https://github.com/haio/2048.git
+cd 2048 && npm install
+node app.js
+```
+
+Have Funnnnn! :laughing:
 
 ## Origin 2048 descriptions : 
 
